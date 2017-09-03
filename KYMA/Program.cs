@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -7,7 +7,7 @@ namespace KYMA
 {
     class Program
     {
-        static string appVersion = "1.0.0";
+        static string appVersion = "1.1.0";
         static bool isRunning = false;
 
         static void Main(string[] args)
@@ -51,8 +51,24 @@ namespace KYMA
                 alive = Check(processName);
                 if (alive)
                 {
-                    if (verbose && lastAlive != alive)
-                        Log("Alive.");
+                    if (!Responding(processName))
+                    {
+                        if (verbose)
+                            Log($"{processName} is not responding and will be killed for restart.");
+
+                        foreach (Process p in Process.GetProcesses())
+                            try
+                            {
+                                if (new FileInfo(p.MainModule.FileName).Name.ToLowerInvariant().Trim() == processName.ToLowerInvariant().Trim())
+                                    p.Kill();
+                            }
+                            catch { }
+                    }
+                    else
+                    {
+                        if (verbose && lastAlive != alive)
+                            Log("Alive and responding.");
+                    }
                 }
                 else
                 {
@@ -63,8 +79,25 @@ namespace KYMA
                     alive = Check(processName);
                     if (alive)
                     {
-                        if (verbose)
-                            Log("Oops, it's alive now. Nothing to do.");
+                        if (!Responding(processName))
+                        {
+                            if (verbose)
+                                Log($"{processName} is not responding and will be killed for restart.");
+
+                            foreach (Process p in Process.GetProcesses())
+                                try
+                                {
+                                    if (new FileInfo(p.MainModule.FileName).Name.ToLowerInvariant().Trim() == processName.ToLowerInvariant().Trim())
+                                        p.Kill();
+                                        
+                                }
+                                catch { }
+                        }
+                        else
+                        {
+                            if (verbose && lastAlive != alive)
+                                Log("Alive and responding.");
+                        }
                     }
                     else
                     {
@@ -101,12 +134,27 @@ namespace KYMA
             return alive;
         }
 
+        static bool Responding(string processName)
+        {
+            bool responding = false;
+            foreach (Process p in Process.GetProcesses())
+                try
+                {
+                    if (new FileInfo(p.MainModule.FileName).Name.ToLowerInvariant().Trim() == processName.ToLowerInvariant().Trim())
+                        if (p.Responding)
+                            responding = true;
+                }
+                catch { }
+
+            return responding;
+        }
+
         static void Usage()
         {
             Console.WriteLine(
                 Environment.NewLine + $"KYMA (Keep Your Miner Alive) {appVersion}" +
                 Environment.NewLine + $"" +
-                Environment.NewLine + $"This app will keep your miner's app alive if it dies for some reason, so your mining" +
+                Environment.NewLine + $"This app will keep your miner's app alive if it dies or not respond for some reason, so your mining" +
                 Environment.NewLine + $"does not get interrupted!. It also works with any other kind of app, not just miners :)" +
                 Environment.NewLine + $"" +
                 Environment.NewLine + $"Has this project been useful for you? Please consider donating!" +
