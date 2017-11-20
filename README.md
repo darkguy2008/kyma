@@ -1,6 +1,10 @@
 # KYMA
 Keeps your cryptocurrency mining apps alive!
 
+### Hey, do you like my work? :)
+
+[![Patreon](https://darkguy2008.github.io/kyma/patron.png)](https://www.patreon.com/darkguy)
+
 # Motivation
 
 I have a few friends with a common need: To keep their mining processes alive because they sometimes crash and they have to constantly monitor those apps. I'm not a miner, I'm mostly a C#/JS developer with 8+ years of experience, so I figured I could help the community since they have been looking for a similar app, so I've made it.
@@ -20,14 +24,6 @@ This will run begin.bat if miner.exe doesn't exist when checking every 1 second,
 If you want to build your own version because you're skeptical (that's a good thing in this cryptoworld!) you can do so pretty easily: Just clone this repo, open the solution file with Visual Studio 2015+, make sure you have .NET Framework 4.0+ installed, build and run!.
 
 Also make sure to set your debugging commandline parameters, else you'll run it and it will close immediately, you need to provide it some arguments in order to debug. If you just want to build, build and then use the .exe that Visual Studio created for you in the bin/Debug folder.
-
-# Support this project! I also have bills to pay :P
-
-If you'd like to donate, please do so! I do this in my spare time and I need some extra money to pay off some debts :(. Anything you can chip in will keep me alive (bad pun, haha) to improve the project with your feedback, solving issues and reviewing pull requests :)
-
-### BTC: 17d9WhEJoF9tr7xNTHUHqQf9MRJ4GQrQ2v
-### ETH: 0x94623e3dcfbf2234D99986F62385617F4EA97d2a
-### LTC: LTxXBCwn8KZ1NZBXNy3MKTAhinZ2nWtG42
 
 # General usage instructions
 ```
