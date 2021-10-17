@@ -3,7 +3,7 @@ Keeps your cryptocurrency mining apps alive!
 
 ### Hey, do you like my work? :)
 
-[![Patreon](https://darkguy2008.github.io/kyma/patron.png)](https://www.patreon.com/darkguy)
+[![Patreon](https://darkguy2008.github.io/kyma/patron.png)](https://www.patreon.com/darkguy2008)
 
 # Motivation
 
